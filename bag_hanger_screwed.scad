@@ -22,6 +22,7 @@ nut_width_max = 5.5;
 nut_thickness = 1.8;
 screw_head_radius = 5.5 / 2;
 screw_head_height = 3;
+screw_width = 3;
 module shave(length, width) {
     difference() {
         cube([
@@ -76,18 +77,18 @@ difference() {
         shave(width + 0.002, wall_thickness + 0.001);
         
    // screw_hole
-   translate([width / 2.0, - 0.001, wall_thickness + nut_width / 2.0])
+   translate([width / 2.0, - 0.001, wall_thickness + nut_width / 2.0 + 0.05])
    rotate([-90,0,0])
-   cylinder(h = wall_thickness * 2 + tube_thickness + 0.002, r=1.5, center=false);
+   cylinder(h = wall_thickness * 2 + tube_thickness + 0.002, r=screw_width/2.0 + 0.05, center=false);
    
    // screw head slot
    translate([width / 2.0, - 0.001, wall_thickness + nut_width / 2.0])
       rotate([-90,0,0])
-         cylinder(h=screw_head_height + 0.001, r=screw_head_radius, center=false);
+         cylinder(h=screw_head_height + 0.001, r=screw_head_radius + 0.1, center=false);
    
    // nut_slot
    translate([-0.001, wall_thickness * 2.0 + tube_thickness - nut_thickness, wall_thickness])
-   cube([width / 2.0 + nut_width_max / 2.0 + 0.001, nut_thickness + 0.001, nut_width]);
+   cube([width / 2.0 + nut_width_max / 2.0 + 0.1, nut_thickness + 0.1, nut_width + 00.001]);
 }
 
 // webbing stop
