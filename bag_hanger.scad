@@ -5,6 +5,7 @@ width = 20;
 This is a model for hanging a bag with horizontal straps to some horizontal tube with zip-ties.
 I used it to hang self sewn bags with 20mm straps to a "Tubus Tara Lowrider" bike rack.
 In my case the tube diameter was 10mm. Including a piece of rubber i lay between the model and the tube the tube thickness of 12mm fits snug.
+The horizontal channels for zip-ties are placed low to tighten the component further.
 */
 
 height = 40;
