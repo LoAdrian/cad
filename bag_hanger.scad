@@ -1,6 +1,12 @@
 $fa = 1;
 $fs = 0.2;
 width = 20;
+/*
+This is a model for hanging a bag with horizontal straps to some horizontal tube with zip-ties.
+I used it to hang self sewn bags with 20mm straps to a "Tubus Tara Lowrider" bike rack.
+In my case the tube diameter was 10mm. Including a piece of rubber i lay between the model and the tube the tube thickness of 12mm fits snug.
+*/
+
 height = 40;
 tube_thickness = 12;
 wall_thickness = 8;
