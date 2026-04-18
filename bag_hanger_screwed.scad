@@ -17,7 +17,11 @@ slot_thickness = 2;
 binder_width = 5;
 binder_thickness = 3;
 binder_slot_height = wall_thickness;
-
+nut_width = 5.5;
+nut_width_max = 5.5;
+nut_thickness = 1.8;
+screw_head_radius = 5.5 / 2;
+screw_head_height = 3;
 module shave(length, width) {
     difference() {
         cube([
@@ -50,37 +54,6 @@ difference() {
     // webbing slot
     translate([-0.001, wall_thickness + tube_thickness + wall_thickness, wall_thickness])
         cube([width + 0.002, slot_thickness, height - wall_thickness + 0.001]);
-    
-    // horizontal binder slot
-    translate([wall_thickness / 2.0, -0.001, binder_slot_height])
-        cube([binder_width, wall_thickness + tube_thickness + wall_thickness + 0.002, binder_thickness]);
-    translate([wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - binder_thickness * 2, binder_slot_height+2*binder_thickness])
-        rotate([-90,0,0])
-            shave(binder_width+0.001, binder_thickness + 0.001);
-    translate([wall_thickness / 2.0, binder_thickness - 0.001, binder_slot_height + 2*binder_thickness])
-        rotate([180,0,0])
-        shave(binder_width + 0.001, binder_thickness + 0.001);
-    
-    translate([width - binder_width - wall_thickness / 2.0, -0.001, binder_slot_height])
-        cube([binder_width, wall_thickness + tube_thickness + wall_thickness + 0.002, binder_thickness]);
-    translate([width - binder_width - wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - binder_thickness * 2, binder_slot_height + 2*binder_thickness])
-        rotate([-90,0,0])
-            shave(binder_width+0.001, binder_thickness + 0.001);
-     translate([width - binder_width - wall_thickness / 2.0, binder_thickness - 0.001, binder_slot_height + 2*binder_thickness])
-        rotate([180,0,0])
-            shave(binder_width + 0.001, binder_thickness + 0.001);   
-    // vertical binder slot
-    translate([wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - binder_thickness, wall_thickness - 0.001])
-        cube([binder_width, binder_thickness + 0.001, height - wall_thickness + 0.002]);
-    translate([wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - 2*binder_thickness, height - binder_thickness + 0.002])
-        shave(binder_width, binder_thickness+ 0.001);
-
-        
-    translate([width - binder_width - wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - binder_thickness, wall_thickness -0.001])
-        cube([binder_width, binder_thickness + 0.001, height - wall_thickness + 0.002]);
-    translate([width - binder_width - wall_thickness / 2.0, wall_thickness + tube_thickness + wall_thickness - 2*binder_thickness, height - binder_thickness + 0.002])
-        shave(binder_width, binder_thickness+ 0.001);
-
         
     // back shave
     translate([-0.001, wall_thickness - 0.001, height - wall_thickness + 0.001])
@@ -94,14 +67,27 @@ difference() {
     
     
     // front shave
-    
         translate([-0.001, wall_thickness + tube_thickness + slot_thickness + hook_thickness, height - wall_thickness])
         rotate([0,0,0])
         shave(width + 0.002, wall_thickness + 0.001);   
     
     translate([-0.001, wall_thickness + tube_thickness + slot_thickness + hook_thickness, wall_thickness])
         rotate([-90,0,0])
-        shave(width + 0.002, wall_thickness + 0.001);    
+        shave(width + 0.002, wall_thickness + 0.001);
+        
+   // screw_hole
+   translate([width / 2.0, - 0.001, wall_thickness + nut_width / 2.0])
+   rotate([-90,0,0])
+   cylinder(h = wall_thickness * 2 + tube_thickness + 0.002, r=1.5, center=false);
+   
+   // screw head slot
+   translate([width / 2.0, - 0.001, wall_thickness + nut_width / 2.0])
+      rotate([-90,0,0])
+         cylinder(h=screw_head_height + 0.001, r=screw_head_radius, center=false);
+   
+   // nut_slot
+   translate([-0.001, wall_thickness * 2.0 + tube_thickness - nut_thickness, wall_thickness])
+   cube([width / 2.0 + nut_width_max / 2.0 + 0.001, nut_thickness + 0.001, nut_width]);
 }
 
 // webbing stop
